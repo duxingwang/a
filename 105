@@ -1,0 +1,36 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        def build_tree(pre, in_order):
+            '''
+            解题思路：因前序遍历是按照根节点的顺序，左右分割点不清楚；而中序遍历恰好是可以找到左右分割，故本题可解
+                步骤1: 先判断pre为空的情况，说明已经到底；直接返回None即可
+                步骤2: 生成前前根节点
+                步骤3: 对当前中序、前序以当前根节点进行左右分割
+                步骤4: 深入递归下去，以链接当前根节点的左右子树
+                步骤5: 返回当前的根节点给上一层
+            :param pre: 前序数组
+            :param in_order: 中序数组
+            :return: 返回当前根节点
+            '''
+            if pre == []: return None
+            root = TreeNode(pre[0])
+            if len(pre) == 1: return root
+            index = in_order.index(root.val)                                    # 找到当前根节点的索引
+            inorder_left, inorder_right = in_order[:index], in_order[index+1:]  # 对中序数组以当前根节点进行左右子树的切割
+            pre_left, pre_right = pre[1:len(inorder_left)+1], pre[index+1:]     # 对前序数组以当前根节点进行左右子树的切割
+            root.left = build_tree(pre_left, inorder_left)
+            root.right = build_tree(pre_right, inorder_right)
+            return root
+        return build_tree(preorder, inorder)
+
+
+作者：focused-antonellibcp
+链接：https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/solution/by-focused-antonellibcp-sus8/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
