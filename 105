@@ -1,4 +1,7 @@
+
+
 import json
+#https://leetcode.cn/problems/generate-parentheses/solutions/194208/ru-men-ji-bie-de-hui-su-fa-xue-hui-tao-lu-miao-don/?orderBy=most_votes
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -99,7 +102,3 @@ class Solution:
         return build_tree(preorder, inorder)
 
 
-作者：focused-antonellibcp
-链接：https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/solution/by-focused-antonellibcp-sus8/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
